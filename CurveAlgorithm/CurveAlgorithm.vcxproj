@@ -141,10 +141,13 @@
   <ItemGroup>
     <ClInclude Include="BezierCurve.h" />
     <ClInclude Include="CurveAlgorithm.h" />
+    <ClInclude Include="PointsGenerator.h" />
+    <ClInclude Include="Curve.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BezierCurve.cpp" />
     <ClCompile Include="CurveAlgorithm.cpp" />
+    <ClCompile Include="PointsGenerator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

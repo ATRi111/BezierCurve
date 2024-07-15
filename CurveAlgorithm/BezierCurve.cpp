@@ -1,6 +1,11 @@
 #include "BezierCurve.h"
 
-Vector3 BezierCurve::Calculate(Vector3* controlPoints, int count, float t)
+BezierCurveAlgorithm* BezierCurveAlgorithm::CreateBezierCurveAlgorithm()
+{
+    return new BezierCurveAlgorithm();
+}
+
+Vector3 BezierCurveAlgorithm::Calculate(Vector3* controlPoints, int count, float t)
 {
     if (count == 1)
         return *controlPoints;

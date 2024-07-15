@@ -21,12 +21,21 @@
     <ClInclude Include="BezierCurve.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PointsGenerator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Curve.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CurveAlgorithm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="BezierCurve.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PointsGenerator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,4 +1,5 @@
 ﻿#include "CurveAlgorithm.h"
+#include<iomanip>
 using namespace std;
 
 #pragma region CurveAlgorithm
@@ -6,7 +7,7 @@ TestAnswer* CurveAlgorithm::Run(TestCase* t, Stopwatch* timer)
 {
 	TestCase_Curve* p = dynamic_cast<TestCase_Curve*>(t);
 	float currentT = 0;
-	float deltaT = 1.0f / p->times;
+	float deltaT = 1.0f / (p->times - 1);
 	Vector3* points = new Vector3[p->times];
 	for (int i = 0; i < p->times; i++)
 	{
@@ -37,16 +38,20 @@ TestCase_Curve::~TestCase_Curve()
 void TestCase_Curve::Print() const
 {
 	cout << endl;
+	cout << "控制点个数:" << count << endl;
 	cout << "控制点:";
 	for (int i = 0; i < count; i++)
 	{
-		cout << controlPoints[i] << " ";
+		cout << fixed << setprecision(3) << controlPoints[i] << " ";
 	}
+	cout << endl;
 	cout << "生成点个数:" << times << endl;
 }
 #pragma endregion
 
 #pragma region TestAnswer_Curve
+const float TestAnswer_Curve::Epsilon = 0.01f;
+
 bool TestAnswer_Curve::Match(float a, float b)
 {
 	return abs(a - b) < Epsilon;
@@ -79,6 +84,8 @@ bool TestAnswer_Curve::Match(TestAnswer* other) const
 }
 void TestAnswer_Curve::Print() const
 {
+	cout << endl;
+	cout << "生成点:";
 	for (int i = 0; i < count; i++)
 	{
 		cout << points[i] << " ";
