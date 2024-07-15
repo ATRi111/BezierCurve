@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include"Testframework.h"
-#include"Vector3.h"
+#include"Vector2.h"
 #include"Curve.h"
 #include<random>
 
@@ -11,7 +11,7 @@ TestCase_Curve* GenerateTestCase()
 {
 	int count = distrbution(engine);
 	int times = distrbution(engine);
-	Vector3* controlPoints = new Vector3[count];
+	Vector2* controlPoints = new Vector2[count];
 	PointsGenerator::Generate(controlPoints, count, -10, 10, -10, 10);
 	return new TestCase_Curve(controlPoints, count, times);
 }

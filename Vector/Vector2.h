@@ -1,5 +1,32 @@
 ﻿#pragma once
 #include<iostream>
+#include<vector>
+#include<string>
+
+inline std::vector<std::string> SplitVector(std::string s)
+{
+	if (!isdigit(s[0]))
+		s = s.substr(1, s.length() - 2);
+	std::vector<std::string> ret;
+	size_t i = s.find_first_of(',');
+	while (i != std::string::npos)
+	{
+		ret.emplace_back(s.substr(0, i));
+		if (i + 1 >= s.length())
+		{
+			s = "";
+			break;
+		}
+		else
+			s = s.substr(i + 1);
+		i = s.find_first_of(',');
+	}
+	if (s != "")
+	{
+		ret.push_back(s);
+	}
+	return ret;
+}
 
 struct Vector2
 {
@@ -9,6 +36,14 @@ struct Vector2
 	const static Vector2 Down;
 	const static Vector2 Right;
 	const static Vector2 Left;
+
+	static Vector2 FromString(std::string s)
+	{
+		auto ss = SplitVector(s);
+		float x = std::stof(ss[0]);
+		float y = std::stof(ss[1]);
+		return Vector2(x, y);
+	}
 
 	float x, y;
 	Vector2()
@@ -88,3 +123,19 @@ inline std::ostream& operator<<(std::ostream& stream, const Vector2& v)
 	stream << "(" << v.x << "," << v.y << ")";
 	return stream;
 }
+inline Vector2 Lerp(const Vector2& a, const Vector2& b, float t)
+{
+	return a + t * (b- a);
+}
+
+namespace std
+{
+	template <>
+	struct hash<Vector2>
+	{
+		size_t operator()(const Vector2& v) const
+		{
+			return hash<float>()(v.x) ^ hash<float>()((v.y));
+		}
+	};
+};

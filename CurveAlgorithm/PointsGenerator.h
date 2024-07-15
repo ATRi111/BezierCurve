@@ -1,5 +1,5 @@
 #pragma once
-#include"Vector3.h"
+#include"Vector2.h"
 #include<vector>
 #include<random>
 
@@ -7,16 +7,16 @@ class PointsGenerator
 {
 public:
 	static std::mt19937 engine;
-	static void Generate(Vector3* controlPoints, int count, float xMin, float xMax,float yMin,float yMax);
+	static void Generate(Vector2* controlPoints, int count, float xMin, float xMax,float yMin,float yMax);
 };
 
 class PointComparer
 {
 public:
-	double static ToAngle(Vector3 v);
+	double static ToAngle(Vector2 v);
 
-	Vector3 center;
+	Vector2 center;
 
-	PointComparer(Vector3 center);
-	bool Compare(Vector3 a, Vector3 b) const;
+	PointComparer(Vector2 center);
+	bool Compare(Vector2 a, Vector2 b) const;
 };

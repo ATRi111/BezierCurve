@@ -9,7 +9,7 @@ TestAnswer* CurveAlgorithm::Run(TestCase* t, Stopwatch* timer)
 	TestCase_Curve* p = dynamic_cast<TestCase_Curve*>(t);
 	float currentT = 0;
 	float deltaT = 1.0f / (p->times - 1);
-	Vector3* points = new Vector3[p->times];
+	Vector2* points = new Vector2[p->times];
 	for (int i = 0; i < p->times; i++)
 	{
 		if (timer)
@@ -21,14 +21,14 @@ TestAnswer* CurveAlgorithm::Run(TestCase* t, Stopwatch* timer)
 	}
 	return new TestAnswer_Curve(points, p->times);
 }
-Vector3 CurveAlgorithm::Calculate(Vector3* controlPoints, int count, float t)
+Vector2 CurveAlgorithm::Calculate(Vector2* controlPoints, int count, float t)
 {
-	return Vector3::Zero;
+	return Vector2::Zero;
 }
 #pragma endregion
 
 #pragma region TestCase_Curve
-TestCase_Curve::TestCase_Curve(Vector3* controlPoints, int count,int times)
+TestCase_Curve::TestCase_Curve(Vector2* controlPoints, int count,int times)
 	:count(count), times(times),controlPoints(controlPoints)
 {
 }
@@ -56,12 +56,12 @@ bool TestAnswer_Curve::Match(float a, float b)
 {
 	return abs(a - b) < Epsilon;
 }
-bool TestAnswer_Curve::Match(Vector3 a, Vector3 b)
+bool TestAnswer_Curve::Match(Vector2 a, Vector2 b)
 {
 	return Match(a.x, b.x) && Match(a.y, b.y);
 }
 
-TestAnswer_Curve::TestAnswer_Curve(Vector3* points, int count)
+TestAnswer_Curve::TestAnswer_Curve(Vector2* points, int count)
 	:points(points), count(count)
 {
 
@@ -125,27 +125,27 @@ TestSet TestSerializer_Curve::Deserialize(std::ifstream& stream) const
 	while (getline(stream, s))
 	{
 		int count, times;
-		Vector3* controlPoints;
-		Vector3* points;
+		Vector2* controlPoints;
+		Vector2* points;
 		vector<string> ss = Split(s, ' ');
 		int i = 0;
 
 		count = stoi(ss[i]);
 		i++;
-		controlPoints = new Vector3[count];
+		controlPoints = new Vector2[count];
 		for (int j = 0; j < count; j++)
 		{
-			controlPoints[j] = Vector3::FromString(ss[i]);
+			controlPoints[j] = Vector2::FromString(ss[i]);
 			i++;
 		}
 		times = stoi(ss[i]);
 		i++;
 		cases.emplace_back(new TestCase_Curve(controlPoints, count, times));
 
-		points = new Vector3[times];
+		points = new Vector2[times];
 		for (int j = 0; j < times; j++)
 		{
-			points[j] = Vector3::FromString(ss[i]);
+			points[j] = Vector2::FromString(ss[i]);
 			i++;
 		}
 		answers.emplace_back(new TestAnswer_Curve(points, times));

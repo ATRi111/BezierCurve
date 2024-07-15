@@ -12,10 +12,10 @@ public:
 	}
 
 	//根据给定控制点以及时间t计算生成的点，误差范围为±0.01
-	Vector3 Calculate(Vector3* controlPoints, int count, float t) override
+	Vector2 Calculate(Vector2* controlPoints, int count, float t) override
 	{
 		//完成这个函数
-		return Vector3::Zero;
+		return Vector2::Zero;
 	}
 };
 
