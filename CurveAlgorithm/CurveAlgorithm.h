@@ -35,3 +35,10 @@ struct TestAnswer_Curve : TestAnswer
 	bool Match(TestAnswer* other) const override;
 	void Print() const override;
 };
+
+class TestSerializer_Curve : public TestSerializer
+{
+public:
+	virtual void Serialize(std::ofstream& stream, const TestSet& set) const override;
+	virtual TestSet Deserialize(std::ifstream& stream) const override;
+};

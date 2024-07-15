@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include"Vector2.h"
+#include"Vector2Int.h"
 
 struct Vector3
 {
@@ -12,6 +13,15 @@ struct Vector3
 	const static Vector3 Left;
 	const static Vector3 Front;
 	const static Vector3 Back;
+
+	static Vector3 FromString(std::string s)
+	{
+		auto ss = SplitVector(s);
+		float x = std::stof(ss[0]);
+		float y = std::stof(ss[1]);
+		float z = std::stof(ss[2]);
+		return Vector3(x, y);
+	}
 
 	union
 	{

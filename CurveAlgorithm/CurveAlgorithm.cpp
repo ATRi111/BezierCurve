@@ -1,5 +1,6 @@
 ﻿#include "CurveAlgorithm.h"
 #include<iomanip>
+#include<string>
 using namespace std;
 
 #pragma region CurveAlgorithm
@@ -39,7 +40,6 @@ void TestCase_Curve::Print() const
 {
 	cout << endl;
 	cout << "控制点个数:" << count << endl;
-	cout << "控制点:";
 	for (int i = 0; i < count; i++)
 	{
 		cout << fixed << setprecision(3) << controlPoints[i] << " ";
@@ -85,11 +85,71 @@ bool TestAnswer_Curve::Match(TestAnswer* other) const
 void TestAnswer_Curve::Print() const
 {
 	cout << endl;
-	cout << "生成点:";
 	for (int i = 0; i < count; i++)
 	{
 		cout << points[i] << " ";
 	}
 	cout << endl;
+}
+#pragma endregion
+
+#pragma region TestSerializer_Curve
+void TestSerializer_Curve::Serialize(std::ofstream& stream, const TestSet& set) const
+{
+	for (int i = 0; i < set.cases.size(); i++)
+	{
+		TestCase_Curve* c = dynamic_cast<TestCase_Curve*>(set.cases[i]);
+		TestAnswer_Curve* a = dynamic_cast<TestAnswer_Curve*>(set.answers[i]);
+		if (c && a)
+		{
+			stream << c->count << " ";
+			for (int i = 0; i < c->count; i++)
+			{
+				stream << c->controlPoints[i] << " ";
+			}
+			stream << c->times << " ";
+			for (int i = 0; i < a->count; i++)
+			{
+				stream << a->points[i] << " ";
+			}
+			stream << endl;
+		}
+	}
+}
+
+TestSet TestSerializer_Curve::Deserialize(std::ifstream& stream) const
+{
+	std::vector<TestCase*> cases;
+	std::vector<TestAnswer*> answers;
+	string s;
+	while (getline(stream, s))
+	{
+		int count, times;
+		Vector3* controlPoints;
+		Vector3* points;
+		vector<string> ss = Split(s, ' ');
+		int i = 0;
+
+		count = stoi(ss[i]);
+		i++;
+		controlPoints = new Vector3[count];
+		for (int j = 0; j < count; j++)
+		{
+			controlPoints[j] = Vector3::FromString(ss[i]);
+			i++;
+		}
+		times = stoi(ss[i]);
+		i++;
+		cases.emplace_back(new TestCase_Curve(controlPoints, count, times));
+
+		points = new Vector3[times];
+		for (int j = 0; j < times; j++)
+		{
+			points[j] = Vector3::FromString(ss[i]);
+			i++;
+		}
+		answers.emplace_back(new TestAnswer_Curve(points, times));
+	}
+	return TestSet(cases, answers, Algorithm::CreateDefault);
 }
 #pragma endregion
