@@ -2,7 +2,7 @@
 #include<iostream>
 #include"Vector2.h"
 
-class Vector3
+struct Vector3
 {
 	const static Vector3 Zero;
 	const static Vector3 One;
@@ -65,7 +65,7 @@ class Vector3
 	}
 	Vector3 operator*(float f) const
 	{
-		return Vector3(f * x, f * y);
+		return Vector3(f * x, f * y, f * z);
 	}
 	Vector3 operator/(float f) const
 	{
@@ -99,3 +99,18 @@ class Vector3
 		return Vector3(x / f, y / f, z / f);
 	}
 };
+
+inline Vector3 operator*(float f, const Vector3& v)
+{
+	return Vector3(f * v.x, f * v.y, f * v.z);
+}
+inline std::ostream& operator<<(std::ostream& stream, const Vector3& v)
+{
+	stream << "(" << v.x << "," << v.y << "," << v.z << ")";
+	return stream;
+}
+
+inline Vector3 Lerp(const Vector3& a, const Vector3& b, float t)
+{
+	return a + t * (b - a);
+}

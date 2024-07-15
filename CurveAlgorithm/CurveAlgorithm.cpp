@@ -7,7 +7,7 @@ TestAnswer* CurveAlgorithm::Run(TestCase* t, Stopwatch* timer)
 	TestCase_Curve* p = dynamic_cast<TestCase_Curve*>(t);
 	float currentT = 0;
 	float deltaT = 1.0f / p->times;
-	Vector2* points = new Vector2[p->times];
+	Vector3* points = new Vector3[p->times];
 	for (int i = 0; i < p->times; i++)
 	{
 		if (timer)
@@ -19,14 +19,14 @@ TestAnswer* CurveAlgorithm::Run(TestCase* t, Stopwatch* timer)
 	}
 	return new TestAnswer_Curve(points, p->times);
 }
-Vector2 CurveAlgorithm::Calculate(Vector2* controlPoints, int count, float t)
+Vector3 CurveAlgorithm::Calculate(Vector3* controlPoints, int count, float t)
 {
-	return Vector2::Zero;
+	return Vector3::Zero;
 }
 #pragma endregion
 
 #pragma region TestCase_Curve
-TestCase_Curve::TestCase_Curve(Vector2* controlPoints, int count,int times)
+TestCase_Curve::TestCase_Curve(Vector3* controlPoints, int count,int times)
 	:count(count), times(times),controlPoints(controlPoints)
 {
 }
@@ -51,12 +51,12 @@ bool TestAnswer_Curve::Match(float a, float b)
 {
 	return abs(a - b) < Epsilon;
 }
-bool TestAnswer_Curve::Match(Vector2 a, Vector2 b)
+bool TestAnswer_Curve::Match(Vector3 a, Vector3 b)
 {
 	return Match(a.x, b.x) && Match(a.y, b.y);
 }
 
-TestAnswer_Curve::TestAnswer_Curve(Vector2* points, int count)
+TestAnswer_Curve::TestAnswer_Curve(Vector3* points, int count)
 	:points(points), count(count)
 {
 
