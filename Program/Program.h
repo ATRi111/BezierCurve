@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include"Testframework.h"
 #include"Vector3.h"
 #include"Curve.h"
@@ -32,11 +32,11 @@ void Test(std::string path, int times, const std::function<Algorithm* ()>& Creat
 
 void TestBezierCurveAlgorithm(std::string path, int times)
 {
-	std::cout << "±´Èû¶ûÇúÏß:" << std::endl;
+	std::cout << "è´å¡žå°”æ›²çº¿:" << std::endl;
 	Test(path, times, BezierCurveAlgorithm::CreateBezierCurveAlgorithm);
 }
 
-//µ÷ÓÃ´Ëº¯Êý»áµ¼ÖÂ´æ·Å´ð°¸µÄÎÄ¼þ±»ÐÞ¸Ä
+//è°ƒç”¨æ­¤å‡½æ•°ä¼šå¯¼è‡´å­˜æ”¾ç­”æ¡ˆçš„æ–‡ä»¶è¢«ä¿®æ”¹
 void GenerateAnswers(std::string path)
 {
 	std::vector<TestCase*> cases;

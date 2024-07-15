@@ -1,37 +1,37 @@
-#include "Program.h"
+ï»¿#include "Program.h"
 #include<string>
 using namespace std;
 
 class MyAlgorithm : public CurveAlgorithm
 {
-	//¿ÉÒÔÔÚÕâÀï¶¨Òå³ÉÔ±±äÁ¿ºÍ³ÉÔ±º¯Êı
+	//å¯ä»¥åœ¨è¿™é‡Œå®šä¹‰æˆå‘˜å˜é‡å’Œæˆå‘˜å‡½æ•°
 public:
 	static MyAlgorithm* CreateMyAlgorithm()
 	{
 		return new MyAlgorithm();
 	}
 
-	//¸ù¾İ¸ø¶¨¿ØÖÆµãÒÔ¼°Ê±¼ät¼ÆËãÉú³ÉµÄµã£¬Îó²î·¶Î§Îª¡À0.01
+	//æ ¹æ®ç»™å®šæ§åˆ¶ç‚¹ä»¥åŠæ—¶é—´tè®¡ç®—ç”Ÿæˆçš„ç‚¹ï¼Œè¯¯å·®èŒƒå›´ä¸ºÂ±0.01
 	Vector3 Calculate(Vector3* controlPoints, int count, float t) override
 	{
-		//Íê³ÉÕâ¸öº¯Êı
+		//å®Œæˆè¿™ä¸ªå‡½æ•°
+		return Vector3::Zero;
 	}
 };
 
 static void TestMyAlgorithm(std::string path, int times)
 {
-	std::cout << "ÎÒµÄÇúÏßÉú³ÉËã·¨:" << std::endl;
+	std::cout << "æˆ‘çš„æ›²çº¿ç”Ÿæˆç®—æ³•:" << std::endl;
 	Test(path, times, MyAlgorithm::CreateMyAlgorithm);
 }
 
-//×¢ÒâÔÚRelease¶ø²»ÊÇDebugÄ£Ê½ÏÂÔËĞĞ´Ë³ÌĞò
+//æ³¨æ„åœ¨Releaseè€Œä¸æ˜¯Debugæ¨¡å¼ä¸‹è¿è¡Œæ­¤ç¨‹åº
 int main(int argc, char* argv[])
 {
 	string path = argv[0];
-	path = path.substr(0, path.find_last_of('\\')) + "\\Answer.txt";
-	int times = 1000;		//¿ØÖÆËã·¨ÔËĞĞ´ÎÊı£»²âÊÔ¼¯ÖĞ°üº¬100¸ö²âÊÔÓÃÀı£¬Ôò×ÜÔËĞĞ´ÎÊı=times¡Á100
+	path = path.substr(0, path.find("\\x64")) + "\\Answer.txt";
+	int times = 10000;		//æ§åˆ¶ç®—æ³•è¿è¡Œæ¬¡æ•°ï¼›æµ‹è¯•é›†ä¸­åŒ…å«100ä¸ªæµ‹è¯•ç”¨ä¾‹ï¼Œåˆ™æ€»è¿è¡Œæ¬¡æ•°=timesÃ—100
 
-	//GenerateAnswers(path);
 	TestBezierCurveAlgorithm(path, times);
-	//TestMyAlgorithm(path, times);
+	TestMyAlgorithm(path, times);
 }
