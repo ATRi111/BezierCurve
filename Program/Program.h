@@ -16,13 +16,13 @@ TestCase_Curve* GenerateTestCase()
 	return new TestCase_Curve(controlPoints, count, times);
 }
 
-void Test(std::string path, int times, const std::function<Algorithm* ()>& CreateSolution)
+void Test(std::string path, int times,int printTimes, const std::function<Algorithm* ()>& CreateSolution)
 {
 	TestSerializer_Curve serializer;
 	TestSet set = TestSet(serializer.DeserializeFrom(path));
 	set.CreateSolution = CreateSolution;
 
-	set.AccuracyTest(3);
+	set.AccuracyTest(printTimes);
 	set.TimeTest(times);
 
 	set.DeleteAnswers();
@@ -33,7 +33,7 @@ void Test(std::string path, int times, const std::function<Algorithm* ()>& Creat
 void TestBezierCurveAlgorithm(std::string path, int times)
 {
 	std::cout << "贝塞尔曲线:" << std::endl;
-	Test(path, times, BezierCurveAlgorithm::CreateBezierCurveAlgorithm);
+	Test(path, times, 0, BezierCurveAlgorithm::CreateBezierCurveAlgorithm);
 }
 
 //调用此函数会导致存放答案的文件被修改
