@@ -38,14 +38,12 @@ TestCase_Curve::~TestCase_Curve()
 }
 void TestCase_Curve::Print() const
 {
-	cout << endl;
-	cout << "控制点个数:" << count << endl;
 	for (int i = 0; i < count; i++)
 	{
-		cout << fixed << setprecision(3) << controlPoints[i] << " ";
+		cout << fixed << setprecision(2) << controlPoints[i] << " ";
 	}
 	cout << endl;
-	cout << "生成点个数:" << times << endl;
+	cout << "要求均匀生成" << times << "个点" << endl;
 }
 #pragma endregion
 
@@ -84,10 +82,9 @@ bool TestAnswer_Curve::Match(TestAnswer* other) const
 }
 void TestAnswer_Curve::Print() const
 {
-	cout << endl;
 	for (int i = 0; i < count; i++)
 	{
-		cout << points[i] << " ";
+		cout << fixed << setprecision(2) << points[i] << " ";
 	}
 	cout << endl;
 }
