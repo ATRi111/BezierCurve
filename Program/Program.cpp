@@ -21,7 +21,7 @@ public:
 
 static void TestMyAlgorithm(std::string path, int times)
 {
-	std::cout << "我的曲线生成算法:" << std::endl;
+	std::cout << "你的曲线生成算法:" << std::endl;
 	Test(path, times, 3, MyAlgorithm::CreateMyAlgorithm);
 }
 
