@@ -33,7 +33,7 @@ void Test(std::string path, int times, int printTimes, const std::function<Algor
 void TestBezierCurveAlgorithm(std::string path, int times)
 {
 	std::cout << "贝塞尔曲线:" << std::endl;
-	Test(path, times, 3, BezierCurveAlgorithm::CreateBezierCurveAlgorithm, true);
+	Test(path, times, 0, BezierCurveAlgorithm::CreateBezierCurveAlgorithm, true);
 }
 
 //调用此函数会导致存放答案的文件被修改
